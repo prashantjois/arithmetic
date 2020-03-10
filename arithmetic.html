@@ -50,7 +50,7 @@
           $(n).html(getRandomInt(maxNumber));
         })
         $('.result').addClass('invisible');
-        $('.answer input').val('').focus();
+        $('.answer input').val('').focus().trigger('focus');
       }
 
       function checkAnswer() {
