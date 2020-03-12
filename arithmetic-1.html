@@ -50,7 +50,7 @@
           $(n).html(getRandomInt(maxNumber));
         })
         $('.result').addClass('invisible');
-        $('.answer input').val('').focus().trigger('focus');
+        $('.sum input').val('').focus().trigger('focus');
       }
 
       function checkAnswer() {
@@ -60,7 +60,7 @@
         });
         const operator = $('.operator').html();
         const actualAnswer = eval(numbers.join(operator));
-        const answer = parseInt($('.answer input').val());
+        const answer = parseInt($('.sum input').val());
 
         $('.result').removeClass("invisible");
         if (actualAnswer === answer) {
@@ -96,7 +96,7 @@
             <td class="equals">
               =
             </td>
-            <td class="answer">
+            <td class="sum">
               <input type="number" name="answer" id="answer" value="" autofocus>
             </td>
             <td class="check">
