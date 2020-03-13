@@ -48,7 +48,7 @@
         const maxNumber = 10;
         const firstNumber = getRandomInt(maxNumber);
         const secondNumber = getRandomInt(maxNumber);
-        $('.number:first-child').html(firstNumber);
+        $($('.number')[1]).html(secondNumber);
         $('.sum').html(firstNumber + secondNumber);
         $('.result').addClass('invisible');
         $('.number input').val('').focus().trigger('focus');
@@ -56,10 +56,10 @@
 
       function checkAnswer() {
         const numbers = [];
-        const firstNumber = parseInt($('.number:first-child').html());
+        const secondNumber = parseInt($($('.number')[1]).html());
         const sum = parseInt($('.sum').html());
         const operator = $('.operator').html();
-        const actualAnswer = sum - firstNumber;
+        const actualAnswer = sum - secondNumber;
         const answer = parseInt($('.number input').val());
 
         $('.result').removeClass("invisible");
@@ -87,12 +87,12 @@
         <tbody>
           <tr>
             <td class="number">
+              <input type="number" name="answer" id="answer" value="" autofocus>
             </td>
             <td class="operator">
               +
             </td>
             <td class="number">
-              <input type="number" name="answer" id="answer" value="" autofocus>
             </td>
             <td class="equals">
               =
