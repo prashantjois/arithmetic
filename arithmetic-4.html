@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <title>Simple Arithmetic Practice</title>
+    <style type="text/css" media="all">
+      html, body {
+        height: 100%;
+        margin: 0px;
+      }
+      .main-container {
+        height: 100%;
+        position: relative;
+      }
+      .operation {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .operation td {
+        font-size: 68px;
+        text-align: center;
+      }
+      .operation .answer {
+        width: 3em;
+        border: 1px solid #000;
+        text-align: center;
+      }
+      .display-message-correct {
+        color: green;
+      }
+      .display-message-incorrect {
+        color: red;
+      }
+    </style>
+    <script charset="utf-8">
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+
+      function newProblem() {
+        const maxNumber = 10;
+        const sum = getRandomInt(maxNumber);
+        $('.sum').html(sum);
+        $('.result').addClass('invisible');
+        $('.number:first-child input').val('').focus().trigger('focus');
+      }
+
+      function checkAnswer() {
+        const numbers = [];
+        $('.number input').each(function(i, n) {
+          numbers.push(parseInt($(n).val()));
+        });
+        const operator = $('.operator').html().trim();
+        const answer = eval(numbers.join(operator));
+        const actualAnswer = parseInt($('.sum').html());
+
+        $('.result').removeClass("invisible");
+        if (actualAnswer === answer) {
+          $('.display-message-correct').show();
+          $('.display-message-incorrect').hide();
+          setTimeout(newProblem, 1000);
+        } else {
+          $('.display-message-incorrect').show();
+          $('.display-message-correct').hide();
+        }
+      }
+
+      $(document).ready(function() {
+        newProblem();
+        $('.check button').click(function() {
+          checkAnswer();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container main-container">
+      <table class="table table-bordered operation">
+        <tbody>
+          <tr>
+            <td class="number">
+              <input type="number" name="answer1" id="answer1" class="answer" value="" autofocus>
+            </td>
+            <td class="operator">
+              +
+            </td>
+            <td class="number">
+              <input type="number" name="answer2" id="answer2"  class="answer"value="" autofocus>
+            </td>
+            <td class="equals">
+              =
+            </td>
+            <td class="sum">
+            </td>
+            <td class="check">
+              <button type="submit" class="btn btn-primary">Check my answer</button>
+            </td>
+          </tr>
+          <tr class="result invisible">
+            <td colspan="6">
+              <div class="display-message-correct">
+                <i class="fa fa-check"></i>
+                You got it right!
+              </div>
+              <div class="display-message-incorrect">
+                <i class="fa fa-times"></i>
+                Try again!
+              </div>
+            </td>
+          <tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
