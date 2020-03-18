@@ -13,3 +13,7 @@
 * Given a sum (under 10), find two numbers that result in that sum:
 
   https://raw.githack.com/prashantjois/arithmetic/master/arithmetic-4.html
+
+* Given two numbers one under 10 and the other between 10 and 100, give their sum:
+
+  https://raw.githack.com/prashantjois/arithmetic/master/arithmetic-5.html

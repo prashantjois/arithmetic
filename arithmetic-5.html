@@ -27,7 +27,7 @@
         font-size: 68px;
         text-align: center;
       }
-      .operation .answer {
+      .operation #answer {
         width: 3em;
         border: 1px solid #000;
         text-align: center;
@@ -40,27 +40,35 @@
       }
     </style>
     <script charset="utf-8">
-      function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max));
-      }
+      function getRandomInt(max, min) {
+        if (!min) {
+          min = 0;
+        }
 
+        return Math.floor(Math.random() * (max - min) + min);
+      }
       function newProblem() {
-        const maxNumber = 10;
-        const sum = getRandomInt(maxNumber);
-        $('.sum').html(sum);
+        const maxFirstNumber = 10;
+        const maxSecondNumber = 100;
+        $('.number').each(function(i, n) {
+          if (i == 0) {
+            $(n).html(getRandomInt(maxFirstNumber));
+          } else {
+            $(n).html(getRandomInt(maxSecondNumber));
+          }
+        })
         $('.result').addClass('invisible');
-        $('.number:first-child input').focus();
-        $('.number input').val('');
+        $('.sum input').val('').focus().trigger('focus');
       }
 
       function checkAnswer() {
         const numbers = [];
-        $('.number input').each(function(i, n) {
-          numbers.push(parseInt($(n).val()));
+        $('.number').each(function(i, n) {
+          numbers.push(parseInt($(n).html()));
         });
-        const operator = $('.operator').html().trim();
-        const answer = eval(numbers.join(operator));
-        const actualAnswer = parseInt($('.sum').html());
+        const operator = $('.operator').html();
+        const actualAnswer = eval(numbers.join(operator));
+        const answer = parseInt($('.sum input').val());
 
         $('.result').removeClass("invisible");
         if (actualAnswer === answer) {
@@ -87,18 +95,17 @@
         <tbody>
           <tr>
             <td class="number">
-              <input type="number" name="answer1" id="answer1" class="answer" value="" autofocus>
             </td>
             <td class="operator">
               +
             </td>
             <td class="number">
-              <input type="number" name="answer2" id="answer2"  class="answer"value="" autofocus>
             </td>
             <td class="equals">
               =
             </td>
             <td class="sum">
+              <input type="number" name="answer" id="answer" value="" autofocus>
             </td>
             <td class="check">
               <button type="submit" class="btn btn-primary">Check my answer</button>
